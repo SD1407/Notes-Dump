@@ -1,5 +1,5 @@
 // what is virtual function ??
-// suppose we hv a base class which has a function (func method) and a derived class from that base class and we hv modified that function int that derived class so now if we are accessing that functions through any pointer of that base class thn virtual function gives us the power to control what we will execute through that virtual key word..
+// suppose we have a base class which has a function (func method) and a derived class from that base class and we have modified that function in that derived class so now if we are accessing that functions through any pointer of that base class then virtual function gives us the power to control what we will execute through that virtual key word..
 #include<iostream>
 using namespace std;
 // class car {

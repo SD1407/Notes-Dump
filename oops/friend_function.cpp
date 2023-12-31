@@ -14,7 +14,7 @@ class triangle {
         area = (1.73*a*a)/4;
     }
     friend void accessT(triangle); // declearing this as a friend function to triangle
-    // we can also decleare a friend class to a class
+    // we can also declare a friend class to a class
     friend class A;
 };
 class A { // this class is a friend class to class triangle

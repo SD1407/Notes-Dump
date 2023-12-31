@@ -1,0 +1,44 @@
+// what should we do??
+// create a venv
+// $ conda install django
+// after installing django django creates a cmd line of django-admin which can do certain things 
+// $ django-admin startproject "my_project"
+// $ cd my_project    // as inside the my_project it'll create a my_project and manage.py and db.sqlite file
+// now after creating a project we can create an app inside it as we know a project consists a lot of apps
+// $ django-admin startapp "my_app" (after coming inside my_project)
+// after creating the app we need to add the app inside our projects settings.py
+// example -
+// IN SETTINGS.PY OF "MY_PROJECT"
+ INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'first_app',
+] 
+
+// now we need to set the views of my_app as what we will see will of my_app part so we need to set its views.py so there for every instance we need to create a function and we need to return something (be it HttpResponse or any .html file)
+   example - def index(request):
+    return HttpResponse("Hello World!")
+
+// now we need to add this for an URL that will be added to the urls.py section of my main project as we can understand thats the main part for accessing everything.
+// so we need to import views from my_app and we need to call the views for a particualr url or path type
+example -
+ // from my_app import views
+ // urlpatterns = [
+    path('', views.index, name='index'),
+    path('admin/', admin.site.urls),
+ ]
+
+// 
+
+
+
+
+
+
+
+
+// virtual envs 
