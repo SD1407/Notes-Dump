@@ -1,0 +1,61 @@
+ ---- General Stuff ----
+ // how docker container works, where to run python commands, how to access db container 
+ // how to connect DB in docker and how to connect DB in Debreaver, how to connect to Psql db using cmd line
+ // how to migrate back to certain migration file and if its not happening we need to manually write the code and change the table and also if data is there we can see some conflicts
+ // how we can use python shell_plus and use the ORM to check and see the objects we are getting from a particular query
+ // how we can import a particular fn in the shell_plus and we can execute it for testing
+ // how to use postman how to set the --curl link, Headers, Params, Request Body, Instance Body etc
+ // how to track APIs and fns of a code base 
+
+
+ ---- Django Commands ---- 
+
+link : https://docs.djangoproject.com/en/5.0/howto/custom-management-commands/
+
+ ---- Google Auto-Complete API ----
+
+link : https://developers.google.com/maps/documentation/places/web-service/autocomplete
+
+Github link : https://github.com/googlemaps/google-maps-services-python/blob/master/googlemaps/geocoding.py
+cc : refer how they have done the functions
+
+ ---- Python Scripts ----
+
+link : https://beapython.dev/2019/12/23/writing-your-first-python-script/
+
+ ---- Empty Migration file ----
+	
+link : https://stackoverflow.com/questions/50320989/how-would-you-create-a-manual-django-migration
+
+// how to define a function and run it inside an empty migration file
+link : https://chat.openai.com/c/8213addf-dac9-42a1-bda2-ac3114b72754
+cc : Do Chatgpt (also you can get this in Stackoverflow)
+
+ ---- List APIs ---- 
+
+link : 
+
+
+ ---- Serializers ----
+
+link : 
+
+ ---- Django Filters ----
+
+link :
+
+ ---- Django Signals ----
+
+link :
+
+
+ ---- AWS Lambda ----
+
+link : 
+
+
+ ---- Helios ----
+
+link : 
+
+

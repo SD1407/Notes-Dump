@@ -1,0 +1,25 @@
+Link for my vlog app : - 
+1. https://docs.google.com/document/d/1LAgC_9gWGiQLTLbB25rmriUhZ1hICBhvxBHYeGd0he4/edit
+2. https://github.com/SD1407/Blogs_App-Django
+
+Doubts : 
+1. Interview qsns : 
+2. What is self, request, *args and **kwargs in django fn
+3. python what is try and exception
+4. Django querysets, ORM, db etc
+5. Django signals
+6. Django filters
+7. Serializers, APIViews(), Class based view and function based view
+8. APIs
+9. CRUD API : 
+10. Django Models and Model field
+11. REST api generics
+12. Decorators python
+13. What is CELERY
+14. What is Config file
+15. What is Base.py in Django
+16. Docker in Django
+17. How to use logging ( logger = logging.getLogger(__name__)
+18. select_related vs prefetch_related in ORM
+19. AWS and AWS lambda(serverless)
+20. Deeplinking 
