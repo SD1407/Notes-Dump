@@ -31,9 +31,12 @@ link : https://stackoverflow.com/questions/50320989/how-would-you-create-a-manua
 link : https://chat.openai.com/c/8213addf-dac9-42a1-bda2-ac3114b72754
 cc : Do Chatgpt (also you can get this in Stackoverflow)
 
- ---- List APIs ---- 
+ ---- APIs ---- 
+For apis creation we can use function base apis or class based apis, for class based apis, we have Django-restframework generics, the best and powerful method to make a CRUD API
 
-link : 
+Doc link : https://www.django-rest-framework.org/api-guide/generic-views/
+
+YT link : https://www.youtube.com/watch?v=Oz3SoVV27ak (watch this for full generics and serializer and API based views) (YT channel name - Bryan Brkic)
 
 
  ---- Serializers ----
@@ -42,7 +45,7 @@ link :
 
  ---- Django Filters ----
     
-    // READ the documentation indetails, also if want to revise it quick check the oh-api code base, there is methods which we can define for looking for the filters and also what value should we retrieve after we got the fillter, like for schedule task CB-305, I have added the level field and also how to filter the queryset with that field, like 'batch__level__" etc etc so check that from oh-api and we can surley create our method and define it inside the level field which you have added
+    // READ the documentation in detail, also if want to revise it quick check the oh-api code base, there is methods which we can define for looking for the filters and also what value should we retrieve after we got the filter, like for schedule task CB-305, I have added the level field and also how to filter the queryset with that field, like 'batch__level__" etc etc so check that from oh-api and we can surely create our method and define it inside the level field which you have added
 
 link : https://django-filter.readthedocs.io/en/stable/guide/install.html   // go on reading 
 YT link : https://www.youtube.com/watch?v=FTUxl5ZCMb8&t=1240s // study it well 
