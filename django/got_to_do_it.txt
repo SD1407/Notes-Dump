@@ -32,11 +32,121 @@ link : https://chat.openai.com/c/8213addf-dac9-42a1-bda2-ac3114b72754
 cc : Do Chatgpt (also you can get this in Stackoverflow)
 
  ---- APIs ---- 
+
 For apis creation we can use function base apis or class based apis, for class based apis, we have Django-restframework generics, the best and powerful method to make a CRUD API
 
 Doc link : https://www.django-rest-framework.org/api-guide/generic-views/
 
 YT link : https://www.youtube.com/watch?v=Oz3SoVV27ak (watch this for full generics and serializer and API based views) (YT channel name - Bryan Brkic)
+
+// important thing :  in the case of ListAPI, we have one read_serializer_class and one write_serializer_class, by default we assign one thing for serializer_class but in if we specify read and write we need to over write the def post function of the ListCreateAPIView class and we need to specify what serialised we want to use, there we get the data by request.data and we can get the headers as well by request.headers and all, we can check the network tab in inspect for headers, now if we want to specify the read_serializer then we can overload the def get as well or we can simply keep the read_serializer as serializer_class(default) for listing the objects, 
+(Remember -  we use write_serializer for taking the request and read for giving the response
+
+// refer to this code : 
+
+batch_suggestion model and crud apis 
+
+batch_suggestion_crud_api code :
+ 
+import logging
+from apps.base.utils.constants.constants import MEMBER_APP
+from rest_framework import filters
+from drf_yasg.utils import swagger_auto_schema
+from rest_framework.response import Response
+from apps.base.response.failure import FAILURE
+from apps.base.response.success import SUCCESS
+from drf_rw_serializers.generics import ListCreateAPIView
+from django_filters.rest_framework import DjangoFilterBackend
+
+from apps.oh_classes.course.models.schedule_suggestions import BatchScheduleSuggestions
+from apps.oh_classes.course.serializers.batch_schedule_suggestion_serializer import BatchScheduleSuggestionGetSerializer, BatchScheduleSuggestionCreteSerializer
+
+logger = logging.getLogger(__name__)
+
+class BatchSuggestionCreateApi(ListCreateAPIView):
+    """
+    Batch Suggestion API View
+    """
+
+    # Ignoring Soft Delete Models On API
+    queryset = BatchScheduleSuggestions.objects.filter(deleted=False)
+    read_serializer_class = BatchScheduleSuggestionGetSerializer
+    write_serializer_class = BatchScheduleSuggestionCreteSerializer
+    filter_backends = [DjangoFilterBackend, filters.SearchFilter]
+    lookup_field = 'uuid'
+    filter_fields = ('user__uuid', 'created_by__uuid')
+
+    @swagger_auto_schema(request_body=BatchScheduleSuggestionCreteSerializer)
+    def post(self, request, *args, **kwargs):
+        try:
+            data = request.data
+            data['source'] = request.headers.get("Source", MEMBER_APP)
+            data['created_by'] = str(request.user.uuid)
+            serializer = BatchScheduleSuggestionCreteSerializer(data=data)
+            if serializer.is_valid(raise_exception=True):
+                serializer.save()
+                return SUCCESS
+            else:
+                return FAILURE
+        except Exception as error:
+            logger.error("error in creating batch schedule suggestion:%s", error)
+            raise error
+
+
+
+
+
+
+
+batch_suggestion_serializer code : 
+
+import logging
+from apps.base.user.serializers.read import BasicUserSerializer
+from apps.oh_classes.course.models.schedule_suggestions import BatchScheduleSuggestions
+from apps.oh_classes.course.serializers.course import CourseSerializer
+
+from rest_framework import serializers
+from rest_framework.fields import UUIDField
+
+logger = logging.getLogger(__name__)
+
+
+class BatchScheduleSuggestionCreteSerializer(serializers.ModelSerializer):
+    """
+    [POST] Batch Schedule Suggestion Serializer
+    """
+
+    class Meta:
+        model = BatchScheduleSuggestions
+        fields = [
+            "uuid",
+            "user",
+            "course",
+            "suggestion",
+            "source",
+            "created_by"
+        ]
+
+class BatchScheduleSuggestionGetSerializer(serializers.ModelSerializer):
+    """
+    [GET] Batch Schedule Suggestion Serializer
+    """
+
+    user = BasicUserSerializer(read_only=True)
+    course = CourseSerializer(read_only=True, many=False)
+
+    class Meta:
+        model = BatchScheduleSuggestions
+        fields = [
+            "uuid",
+            "user",
+            "course",
+            "suggestion",
+            "source",
+            "created_by"
+        ]
+
+
 
 
  ---- Serializers ----
@@ -64,4 +174,9 @@ link :
 
 link : 
 
+
+
+ ------Django Rest Framework creating child objects in parent serializer using child serializer------
+
+Link : https://stackoverflow.com/questions/57186336/django-rest-framework-creating-child-objects-in-parent-serializer-using-child-se
 
