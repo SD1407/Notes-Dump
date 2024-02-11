@@ -263,6 +263,14 @@ REMEMBER, here we are creating the child model of interaction topic on the go.
 link : https://django-filter.readthedocs.io/en/stable/guide/install.html   // go on reading 
 YT link : https://www.youtube.com/watch?v=FTUxl5ZCMb8&t=1240s // study it well 
 
+
+** important thing, if you have a parent model, and a child model, child has a foreign key of parent but parent has nothing to do with child, then also with related name we can search of parent model objects which has a particular property in child model
+
+
+Example : Interaction model has no attribute called interaction_topic, but interaction_topic has attribute called interaction whose "related_name is 'interaction_topics'" now we can filter interaction model objects based on interaction_topics names
+Like : topic = filters.CharFilter(field_name='interaction_topics__name', lookup_expr='icontains')
+
+
  ---- Django Signals ----
 
 link :
