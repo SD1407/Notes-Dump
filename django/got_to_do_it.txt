@@ -151,7 +151,110 @@ class BatchScheduleSuggestionGetSerializer(serializers.ModelSerializer):
 
  ---- Serializers ----
 
-link : 
+Read the serializer from the above api section, other than that use generics or function based api calls and how their serializer works, we can over ride a lot of things, before passing to the serializer and after passing to the serializer as well (checkout the code of crm_interaction and crm_interaction_topic) for details 
+
+
+
+Doc link : https://github.com/encode/django-rest-framework/blob/master/rest_framework/serializers.py#L86 (we can override everything)
+
+Code of api : 
+
+from rest_framework.generics import ListCreateAPIView
+from apps.crm.models.crm_interaction import CrmInteraction
+from apps.crm.serializers.crm_interaction import *
+from drf_yasg.utils import swagger_auto_schema
+from apps.base.response.failure import FAILURE
+from apps.base.response.success import SUCCESS
+from rest_framework.response import Response
+
+class CrmInteractionListCreateAPIView(ListCreateAPIView):
+    
+    queryset = CrmInteraction.objects.all().select_related("parent", "created_by")
+    serializer_class = CrmInteractionGetSerializer
+    read_serializer_class = CrmInteractionGetSerializer
+    write_serializer_class = CrmInteractionCreateSerializer
+    
+    @swagger_auto_schema(request_body=CrmInteractionCreateSerializer)
+    def post(self, request, *args, **kwargs):
+        try:
+            data = request.data
+            topic_list = data.pop("interaction_topics")
+            serializer = CrmInteractionCreateSerializer(data=data, context = {'topics' : topic_list})
+            if serializer.is_valid(raise_exception=True):
+                serializer.save()
+                return SUCCESS
+            else:
+                return FAILURE
+        except Exception as error:
+            logger.error(f"error in creating Crm Interaction {error}")
+            raise error
+
+
+Code for serializer :
+
+import logging
+
+from rest_framework import serializers
+from apps.crm.models.crm_interaction import CrmInteraction
+from apps.crm.models.crm_interaction_topic import CrmInteractionTopic
+from apps.oh_users.student.serializers.basic_parent import BasicParentSerializer
+# from apps.crm.serializers.crm_interaction_topic import CrmInteractionTopicCreateSerializer
+from apps.base.user.serializers.read import BasicUserSerializer, GetUserSerializer
+
+
+logger = logging.getLogger(__name__)
+
+class CrmInteractionCreateSerializer(serializers.ModelSerializer):
+    
+    '''
+        Crm Interaction Write serializer
+    '''
+    # interaction = CrmInteractionTopicCreateSerializer
+    class Meta:
+        model = CrmInteraction
+        fields = [
+            "uuid",
+            "parent",
+            "interaction_date",
+            "interaction_mode",
+            "follow_up_date",
+            "follow_up_required",
+            "interaction_summary",
+            "created_by"
+        ]
+        
+    def create(self, validated_data):
+        topics = self.context.get('topics', [])
+        interaction = CrmInteraction.objects.create(**validated_data)
+        for topic in topics:
+            CrmInteractionTopic.objects.create(interaction = interaction, name=topic)
+        return interaction
+
+class CrmInteractionGetSerializer(serializers.ModelSerializer):
+    
+    '''
+        Crm Interaction Read Serializer
+    '''
+    parent = BasicParentSerializer(read_only=True, many=False)
+    created_by = GetUserSerializer(read_only=True, many=False)
+    
+    class Meta:
+        model = CrmInteraction
+        fields = [
+            "uuid",
+            "parent",
+            "interaction_date",
+            "interaction_mode",
+            "follow_up_date",
+            "follow_up_required",
+            "interaction_summary",
+            "created_by"
+        ]
+    
+    
+
+REMEMBER, here we are creating the child model of interaction topic on the go. 
+
 
  ---- Django Filters ----
     
