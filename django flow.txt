@@ -24,7 +24,7 @@
     return HttpResponse("Hello World!")
 
 // now we need to add this for an URL that will be added to the urls.py section of my main project as we can understand thats the main part for accessing everything.
-// so we need to import views from my_app and we need to call the views for a particualr url or path type
+// so we need to import views from my_app and we need to call the views for a particular url or path type
 example -
  // from my_app import views
  // urlpatterns = [
