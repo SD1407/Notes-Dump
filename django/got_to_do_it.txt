@@ -1,3 +1,8 @@
+
+------All in one------
+Link: https://github.com/encode/django-rest-framework/tree/master
+
+
  ---- General Stuff ----
  // how docker container works, where to run python commands, how to access db container 
  // how to connect DB in docker and how to connect DB in Debreaver, how to connect to Psql db using cmd line
