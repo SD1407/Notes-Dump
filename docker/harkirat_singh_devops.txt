@@ -1,0 +1,11 @@
+// YT link : https://www.youtube.com/watch?v=fSmLiOMp2qI&list=PLVKLWop9wWA9h7qWQb6xByfXsRq18U-68  
+
+// github link : https://github.com/hkirat/docker-roadmap
+
+// cmds
+docker ps
+docker build . -t <tag_name>
+docker run <tag_name>
+docker login
+docker push <tag_name>
+docker pull <tag_name>
