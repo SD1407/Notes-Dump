@@ -22,5 +22,7 @@ https://oh-database-backups.s3.ap-south-1.amazonaws.com/prod-backups/admin_prod_
 docker-compose -f docker-compose.local.yml up
 docker exec -it <container_name>(eg. djangoapp, db) bash
 docker-compose -f docker-compose.local.yml build
+docker ps
+docker inspect <conatiner_name>
 docker images
 docker rmi -f <image_id>  // to delete existing images in local machine
