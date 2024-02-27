@@ -124,3 +124,11 @@ $ python manage.py migrate
 
 // follow the below article for pushing large data into git repo
 // https://medium.com/linkit-intecs/how-to-upload-large-files-to-github-repository-2b1e03723d2
+
+
+=======NEWLY ADDED FOR OH=========
+
+$ git fetch origin 	// for getting every branch locally and remotely
+$ git merge <branch_name>	// for merging any branch its important in case of rebasing 
+$ git checkout -- <file_name> 	// to not add this file in tracking while working and changing branches
+// we use git fetch and merge to merge from remotely to locally

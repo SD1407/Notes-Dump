@@ -1,0 +1,26 @@
+
+// BE setup 
+1. Clone the repo onto your PC
+2. Use the docker-compose.local.yml file you are currently using
+3. Use the local.py file you are currently using
+4. Download the latest data dump from S3 - 
+https://oh-database-backups.s3.ap-south-1.amazonaws.com/prod-backups/admin_prod_2024-01-27.sql.gz
+5. Restore the data dump in the Postgres DB
+ a. Copy the data dump to the Postgres db container
+  - docker cp admin_prod_XXX.sql.gz <container_id>:/
+ b. Login to the Postgres DB container
+ - docker exec -it db bash
+ c. Restore the Db dump
+ - g_restore -d oh_admin_local -U doadmin -c -v admin_prod_XXX.sql.gz
+6. Login to the 'djangoapp' docker container and run the following command
+ - docker exec -it djangoapp
+ - python manage.py migrate
+
+
+======= docker commands oh ========
+
+docker-compose -f docker-compose.local.yml up
+docker exec -it <container_name>(eg. djangoapp, db) bash
+docker-compose -f docker-compose.local.yml build
+docker images
+docker rmi -f <image_id>  // to delete existing images in local machine
