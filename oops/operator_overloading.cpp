@@ -4,6 +4,7 @@
 using namespace std; 
 // study the notes with this
 
+// suppose we are overloading '+' operator then, what we generally do? we do a+b, here this pointer always points to 'a' and 'b', we need to pass as an argument, so the argument we pass in the function for a operator overload case, we generally pass 'b' and this->(something) will be from 'a'
 struct YouTubeChannel {
     string Name;
     int SubscribersCount;
@@ -51,3 +52,5 @@ int main()
     
     cin.get();
 }
+
+
